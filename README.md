@@ -31,7 +31,7 @@ Reiterando, para más información, es posible dirigirse a cada archivo adjunto 
 _____________
 
 ### Avance 3
-Para este avance, se identifican a los métodos polimórficos de la clase con herencia 'Jugador'. A dos métodos (setName y setMark) se les incluye la palabra reservada 'virtual' para indicar que se hará uso del polimorfismo, pues tendran implementaciones diferentes dependiendo de la clase hija. En el caso del método 'setName' únicamente el usuario 'J1' podrá cambiar su nombre, por lo que la clase padre indica un nombre por default mientras que la hija lo implementa mediante la definición del nombre dado por el usuario. La clase hija 'CPU' no lo necesita pues usamos el nombre definido en el constructor por default.
+Para este avance, se identifican a los métodos polimórficos de la clase con herencia 'Jugador'. A dos métodos (setName y setMark) se les incluye la palabra reservada 'virtual' para indicar que se hará uso del polimorfismo, pues tendrán implementaciones diferentes dependiendo de la clase hija. En el caso del método 'setName' únicamente el usuario 'J1' podrá cambiar su nombre, por lo que la clase padre indica un nombre por default mientras que la hija lo implementa mediante la definición del nombre dado por el usuario. La clase hija 'CPU' no lo necesita pues usamos el nombre definido en el constructor por default.
 
 Para el método 'setMark' existe una implementación algo más compleja, mientras que la clase padre únicamente implementa el método en su generalidad, la clase hija 'J1' hará una evaluación para definir la marca deseada y dada por el usuario; mientras que la clase hija "CPU" tomará la marca definida por el usuario para definir la propia (Si el usuario escoge 'X', entonces la cpu tendrá 'O' y viceversa).
 
