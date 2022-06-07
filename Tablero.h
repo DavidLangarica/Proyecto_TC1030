@@ -80,7 +80,7 @@ void Tablero :: tab_referencia(){
 
 
 char Tablero :: colocar_marcas(int posicion, char marca){
-    // En est método se reemplaza el contenido de las casillas por el de la marca del usuario en turno. Retornamos el arreglo actualizado para su despliegue.
+    // En este método se reemplaza el contenido de las casillas por el de la marca del usuario en turno. Retornamos el arreglo actualizado para su despliegue.
     casillas[posicion] = marca;
     return casillas[10];
 }
@@ -93,15 +93,15 @@ bool Tablero :: check_freespace(){
     int j=0;
 
     for (int i=1; i<10; i++){
-        if (casillas[i] == 32){
+        if (casillas[i] == 32){ // Igualada a 32 por el codigo ASCII del espacio
             j++; 
         }
     }
     if (j == 0){
-        return true;
+        return true; // No hay casillas en blanco
     }
     else{
-        return false;
+        return false; // Todavía hay casillas en blanco
     }
 };
 
