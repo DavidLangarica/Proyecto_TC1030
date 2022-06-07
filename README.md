@@ -17,7 +17,7 @@ Parecido al caso anterior, tenemos a la clase 'Tablero', en donde se vuelve a to
 _____________
 
 ### Avance 2
-Favor de compilar el archivo main.cpp, el cual fue probado en múltiples plataformas para comprobar su compatibilidad.
+Favor de compilar el archivo main.cpp por medio de g++, y el cual fue probado en múltiples plataformas para comprobar su compatibilidad.
 
 En este avance se presenta la transición del diagrama de clases al código en C++ haciendo uso de la programación orientada a objetos. En todos los archivos se encontrarán con comentarios que describen el funcionamiento y el objetivo de cada método (y posiblemente cada línea) para asegurar la comprensión total del mismo.
 
@@ -26,8 +26,6 @@ En el programa, se implementó el concepto de Herencia (como se mostró en el di
 En la clase hija 'J1' se hace uso del setter para el nombre, para que el usuario pueda editar su nombre y sea usado durante el juego. En el caso de la CPU no es necesario, pues no tendrá una definición para un nombre en específico, por lo que se define en el constructor.
 
 Asimismo, se ocupa la sobreescritura de métodos con el método setter de la clase padre y de las clases hijas para definir la marca a utilizar en el juego, en el caso de la clase padre se ocupa la técnica tradicional para un método setter. Sin embargo, es preciso que la clase hija 'J1' tenga un método setter con una interacción directa con el usuario para que pueda escoger entre 'X'/'O', con base en ello, la computadora obtendrá su marca a través de una evaluación.
-
-Reiterando, para más información, es posible dirigirse a cada archivo adjunto del código y considerar los comentarios dentro del código realizado.
 _____________
 
 ### Avance 3
@@ -37,3 +35,12 @@ Para el método 'setMark' existe una implementación algo más compleja, mientra
 
 Después, se retoma que los jugadores poseen una relación de agregación con la clase 'Gato' por lo que las clases hijas 'J1' y 'CPU' se agregan en el main. Para cubrir lo que se ha mencionado con relación al polimorfismo, primero definimos al arreglo del tipo 'Jugador' con punteros (para indicar que existen métodos con polimorfismo en la clase con herencia y que se encuentran en el heap). Posteriormente, para definir a los objetos creados con punteros, se aplica con el constructor por default a los dos tipos de jugadores que interceden en el juego (J1 y CPU) con sus respectivas posiciones en el arreglo del tipo Jugador. Es así, como se implementan los métodos y se aplica el polimorfismo en el método definido como tal.
 _____________
+
+### Avance 4
+Desde el principio, nunca se ha deseado crear un objeto a partir de la clase Jugador, sino que el proposito de esta es exclusivamente detonar las características similares del J1 y CPU. Por lo tanto, para este último avance, se convierte a la clase Jugador en abstracta para que no sea posible crear objetos a partir de la misma, para ello se usó la clase con polimormismo "setMark" en donde se hizo la correspondiente igualación a cero y fue así como se convirtió la clase.
+
+Más aún, a razón de que la clase Jugador se convirtió en abstracta, entonces fue preciso hacer ajustes en la clase Gato, pues ahí "se creaban" objetos de ese tipo para poder emplearlos en los métodos a aplicar en el main. Por lo tanto, se convirtió al arreglo de Jugador jugadores[2] a un arreglo de punteros del tipo Jugador que posteriormente puedan ser reemplazados por objetos del tipo J1 y CPU directamente en el heap para no provocar errores al hacer uso de una clase abstracta, de ahí se derivó el tener que cambiar los métodos en los que se usan a los jugadores para que fueran compatibles con los punteros.
+
+_____________
+
+Para más información, es posible dirigirse a cada archivo adjunto del código y considerar los comentarios dentro del código realizado.
