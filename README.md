@@ -37,7 +37,7 @@ Después, se retoma que los jugadores poseen una relación de agregación con la
 _____________
 
 ### Avance 4
-Desde el principio, nunca se ha deseado crear un objeto a partir de la clase Jugador, sino que el proposito de esta es exclusivamente detonar las características similares del J1 y CPU. Por lo tanto, para este último avance, se convierte a la clase Jugador en abstracta para que no sea posible crear objetos a partir de la misma, para ello se usó la clase con polimormismo "setMark" en donde se hizo la correspondiente igualación a cero y fue así como se convirtió la clase.
+Desde el principio, nunca se ha deseado crear un objeto a partir de la clase Jugador, sino que el proposito de esta es exclusivamente detonar las características similares del J1 y CPU. Por lo tanto, para este último avance, se convierte a la clase Jugador en abstracta para que no sea posible crear objetos a partir de la misma, para ello se usó la clase con polimormismo 'setMark' en donde se hizo la correspondiente igualación a cero y fue así como se convirtió la clase.
 
 Más aún, a razón de que la clase Jugador se convirtió en abstracta, entonces fue preciso hacer ajustes en la clase Gato, pues ahí "se creaban" objetos de ese tipo para poder emplearlos en los métodos a aplicar en el main. Por lo tanto, se convirtió al arreglo de Jugador jugadores[2] a un arreglo de punteros del tipo Jugador que posteriormente puedan ser reemplazados por objetos del tipo J1 y CPU directamente en el heap para no provocar errores al hacer uso de una clase abstracta, de ahí se derivó el tener que cambiar los métodos en los que se usan a los jugadores para que fueran compatibles con los punteros.
 
