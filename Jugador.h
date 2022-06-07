@@ -12,7 +12,7 @@ using std::cin;
 using std::endl;
 using std::string;
 
-// Clase padre
+// Clase padre (Abstracta)
 class Jugador{
     public: // Atributos 
         string nombre;
@@ -26,8 +26,10 @@ class Jugador{
         char getMark(){return marca;};
         void setName(string nombre_) {nombre = nombre_;}
 
-        // Método con polimorfismo
-        virtual void setMark(char marca_) {marca = marca_;} // Polomorfismo porque el usuario escoge su marca, mientras que la computadora la obtiene "automaticamente" con base en la marca del usuario.
+        /* Método con polimorfismo, declarado con las características para convertir a la clase en clase abstracta.
+            Polomorfismo porque tendrá sobrescritura, el usuario escoge su marca, mientras que la computadora la obtiene
+            "automaticamente" con base en la marca del usuario.*/
+        virtual void setMark(char marca_) = 0;
 
 };
 
