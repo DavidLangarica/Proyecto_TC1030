@@ -12,7 +12,7 @@
 
 class Gato{
     private: // Atributos
-    Jugador jugadores[2];
+    Jugador *jugadores[2]; // Se declara como arreglo de apuntadores porque Jugador es una clase abstracta.
     Trivia preguntas[10];
     Tablero board;
 
@@ -21,8 +21,8 @@ class Gato{
         Gato(); // Constructor por default
         ~Gato(){cout << "\nTerminando el juego... Hasta luego!\n" << endl;} // Destructor con un cout para indicar el fin del programa
 
-        // Método de agregación.
-        void addNew_player(Jugador jugadores_, int numplayer){jugadores[numplayer] = jugadores_;}
+        // Método de agregación, el objeto tiene un apuntador, porque se espera recibir un objeto de "Jugadores" del arreglo de apuntadores del main.
+        void addNew_player(Jugador *jugador_, int numplayer){jugadores[numplayer] = jugador_;}
 
         // Métodos de impresión de texto.
         void bienvenidatxt();
@@ -82,7 +82,7 @@ Gato :: Gato(){
     Trivia pregunta9(9,"Geografia","Cual es el rio mas grande del mundo?","Nilo","Misisipi","Yangtze","Amazonas");
     preguntas_[9] = pregunta9;
 
-    // Guardamos a las preguntas en el arreglo
+    // Guardamos las preguntas en el arreglo
     for (int i = 1; i<10; i++){
         preguntas[i] = preguntas_[i];
     }
@@ -117,7 +117,7 @@ string Gato :: display_pregunta(int num_pregunta){
 };
 
 bool Gato :: def_freespace(int pos){
-    // Importamos al tablero y la posición elegida (casilla) por el Jugador para ver si el espacio está disponible
+    // Importamos al tablero y la posición elegida (casilla) por el Jugador en turno para ver si el espacio está disponible
     char tab[10];
     for (int i=1; i<10;i++){
         tab[i] = board.getTablero(i);
@@ -139,11 +139,11 @@ bool Gato :: nohay_freespace(){
 };
 
 void Gato :: j1_jugar(int num_player){
-    // Desarrollo de las jugadas del usuario, se conestan las preguntas y se verifican que sean correctas para poder colocar una marca.
+    // Desarrollo de las jugadas del usuario, se contestan las preguntas y se verifican que sean correctas para poder colocar una marca.
     int pos;
 
     do{
-        cout << "\nTurno de: " << jugadores[num_player].getName() << endl;
+        cout << "\nTurno de: " << jugadores[num_player]->getName() << endl;
         cout << "\nSelecciona una posicion del 1-9 para colocar tu marca: ";
         cin >> pos;
 
@@ -153,23 +153,23 @@ void Gato :: j1_jugar(int num_player){
                 // Si la casilla esta desocupada, continúa
                 if (preguntacasilla(pos) == true){
                     // Si respondio correctamente a la pregunta, continúa
-                    board.colocar_marcas(pos,jugadores[num_player].getMark());
+                    board.colocar_marcas(pos,jugadores[num_player]->getMark());
                     break;
                 }
                 else{
                     // No respondio correctamente a la pregunta, pierde el turno y no coloca su marca
                     cout << "\nLamentablemente pierdes este turno :(" << endl;
-                    board.colocar_marcas(0,jugadores[num_player].getMark());
+                    board.colocar_marcas(0,jugadores[num_player]->getMark());
                     break;
                 }
             }
             else{
-                // La casilla está ocupada
+                // La casilla está ocupada, se le pide que ingrese otra
                 cout << "\nPosicion ocupada, intenta nuevamente" << endl;
             }
         }
         else{
-            // La opcion no está entre el rango 1-9
+            // La opcion no está entre el rango 1-9, se le pide que vuelva a intentarlo
             cout << "\nOpcion invalida o fuera de rango, intenta nuevamente" << endl;
         }
     }while(true);
@@ -191,13 +191,13 @@ void Gato :: cpu_jugar(int num_player){
     */
     srand((unsigned int) time(NULL));
 
-    cout << "\nTurno de: " << jugadores[num_player].getName() << endl;
+    cout << "\nTurno de: " << jugadores[num_player]->getName() << endl;
 
     do{
         n_random = 1 + rand() % 9; // Escoge un numero entre 1 y 9
         if(def_freespace(n_random) == true){
             // Si el espacio aleatorio está desocupado, se pone su marca. De lo contrario vuelve a escoger un número
-            board.colocar_marcas(n_random,jugadores[num_player].getMark());
+            board.colocar_marcas(n_random,jugadores[num_player]->getMark());
             break;
         }
     }while (true);
@@ -212,7 +212,7 @@ bool Gato :: def_jugadasganadoras(int num_player){
     for (int i=1; i<10;i++){
         tab[i] = board.getTablero(i);
     }
-    char marc = jugadores[num_player].getMark();
+    char marc = jugadores[num_player]->getMark();
 
     // Define las posiciones que tienen que ser ocupadas para que uno de los jugadores pueda ganar.
 
@@ -228,6 +228,7 @@ bool Gato :: def_jugadasganadoras(int num_player){
 
 bool Gato :: preguntacasilla(int pos_){
     // Método para mostrar todas las preguntas dependiendo de la casilla y evaluar si son correctas para cada pregunta.
+
     char ans; // Variable para almacenar la letra de la respuesta del usuario
     
     // Validación de la respuesta correcta de la pregunta 1
