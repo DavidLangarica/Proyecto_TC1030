@@ -34,6 +34,7 @@ class Trivia{
 // Implementación de los métodos---------------------------------------------------------------------------------------------
 
 Trivia :: Trivia(int num_pregunta_, string categoria_, string pregunta_,string opcion_a_,string opcion_b_,string opcion_c_,string opcion_d_){
+    // Constructor con parámetros
     num_pregunta = num_pregunta_;
     categoria = categoria_;
     pregunta = pregunta_;
