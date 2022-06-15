@@ -50,7 +50,7 @@ class Gato{
  * son declaradas como tal en esta parte, ya que son constantes en todo el juego. Como son 9 casillas, se declara 
  * la pregunta correspondiente a cada una haciendo uso del constructor con parámetros de la clase TRIVIA
  *
- * @param 
+ * @param  
  * @return 
  */
 
