@@ -44,8 +44,14 @@ Trivia :: Trivia(int num_pregunta_, string categoria_, string pregunta_,string o
     opcion_d = opcion_d_;
 };
 
+/**
+ * get_preguntainfo define el formato que tendrá el despliegue en consola de cualquier pregunta que se pueda declarar.
+ *
+ * @param
+ * @return stringstream con el formato definido para las preguntas que se definan
+ */
+
 string Trivia :: get_preguntainfo(){
-    // Se define el formato que tendrá el despliegue en consola de cualquier pregunta que se pueda declarar.
     std::stringstream aux;
     aux << "\n" << num_pregunta << ". " << categoria << endl;
     aux << "Pregunta: " << pregunta << endl;

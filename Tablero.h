@@ -33,10 +33,16 @@ class Tablero{
 
 // Implementación de los métodos---------------------------------------------------------------------------------------------
 
+/**
+ * El constructor por default Tablero() reemplaza inicialmente los espacios vacíos de las casillas con espacios vacíos. 
+ * Se usa la igualdad a 32 ya que es el valor en código ASCII del espacio en blanco, siendo así como podremos manejar al 
+ * arreglo de casillas del tipo char a lo largo del juego.
+ *
+ * @param
+ * @return
+ */
+
 Tablero :: Tablero(){
-    /* Comenzaremos por reemplazar inicialmente a los espacios vacíos de las casillas con espacios vacíos. Se usa la igualdad a 32 
-    ya que es el valor en código ASCII del espacio en blanco, siendo así como podremos manejar al arreglo de casillas del tipo char a lo 
-    largo del juego. */
 
     for (int i=1; i<=10; i++)
     {
@@ -44,8 +50,15 @@ Tablero :: Tablero(){
     }
 };
 
+/**
+ * formato() define el formato del tablero del juego, se compone de líneas que separan a las casillas 
+ * y de un arreglo que va definiendo los números que corresponden a cada casilla.
+ *
+ * @param
+ * @return
+ */
+
 void Tablero :: formato(){
-    // Este es el formato del tablero del juego, se compone de líneas que separan a las casillas y de un arreglo que va definiendo los números que corresponden a cada casilla.
     cout << "_________________" << endl;
     cout << "     |     |" << endl;
     cout << "  "<<casillas[1]<<"  |  "<<casillas[2]<<"  |  "<<casillas[3]<<"  " << endl;
@@ -61,8 +74,15 @@ void Tablero :: formato(){
     cout << "_________________" << endl;
 };
 
+/**
+ * tab_referencia() es el formato únicamente de referencia para el usuario del juego, en donde podrá ver 
+ * inicialmente los números correspondientes para cada casilla. 
+ *
+ * @param
+ * @return
+ */
+
 void Tablero :: tab_referencia(){
-    // Este es el formato de referencia para el usuario del juego, en donde podrá ver inicialmente los números correspondientes para cada casilla.
     cout << "_________________" << endl;
     cout << "     |     |" << endl;
     cout << "  "<<"1"<<"  |  "<<"2"<<"  |  "<<"3"<<"  " << endl;
@@ -79,17 +99,27 @@ void Tablero :: tab_referencia(){
 };
 
 
+/**
+ * En colocar_amercas() se reemplaza el contenido de las casillas por el de la marca del jugador en turno. 
+ *
+ * @param int posicion es la casilla escogida; char es la marca (X/0) del jugador
+ * @return Arreglo del tipo char con las casillas actualizadas (ocupadoas y no ocupadas) para su despliegue. 
+ */
+
 char Tablero :: colocar_marcas(int posicion, char marca){
-    // En este método se reemplaza el contenido de las casillas por el de la marca del usuario en turno. Retornamos el arreglo actualizado para su despliegue.
     casillas[posicion] = marca;
     return casillas[10];
 }
 
+/**
+ * En check_freespace() se evalua si todas las casillas guardan alguna marca, para verificar cuando exista un empate.
+ * Usa a la variable auxiliar j para llevar el contador de las casillas libres
+ *
+ * @param 
+ * @return bool que indica si existen o no casillas libres en el tablero
+ */
 
 bool Tablero :: check_freespace(){
-    /* En este método se evalua si todas las casillas guardan alguna marca, para verificar cuando exista un empate. Usamos a la variable
-    auxiliar j para llevar el contador de las casillas libres*/
-    
     int j=0;
 
     for (int i=1; i<10; i++){

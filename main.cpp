@@ -64,7 +64,7 @@ int main(){
         cout << "CPU" << endl;
     }
     
-    /* Hacer una pausa para que el usuario pueda ver quien comienza, se usa un cin que posteriormente se 
+            /* Hacer una pausa para que el usuario pueda ver quien comienza, se usa un cin que posteriormente se 
             ignora para que pueda digitar el enter, visto en: https://stackoverflow.com/questions/903221/press-enter-to-continue */
             cout << "\nPresiona enter para continuar...";
             cin.get();

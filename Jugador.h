@@ -14,7 +14,7 @@ using std::string;
 
 // Clase padre (Abstracta)
 class Jugador{
-    public: // Atributos 
+    protected: // Atributos 
         string nombre;
         char marca;
 
@@ -52,6 +52,14 @@ class J1 : public Jugador{
 };
 
 // Implementación de los métodos de la clase hija J1-------
+
+/**
+ * setMark() define la marca deseada por el usuario, se ocupa una variable de ayuda para la evaluación
+ * e implementación en el método. El resultado define la marca de J1 como X/O
+ *
+ * @param char variable de ayuda que identificará a la marca escogida usuario
+ * @return 
+ */
 
 void J1 :: setMark(char mark){
 
@@ -91,6 +99,14 @@ class CPU : public Jugador{
 };
 
 // Implementación de los métodos de la clase hija CPU-------
+
+/**
+ * setMark() define la marca por la computadora con base en lo escogido por
+ * el usuario.
+ *
+ * @param char variable de ayuda que identificará a la marca escogida usuario
+ * @return 
+ */
 
 void CPU :: setMark(char mark){
     /* Con base a la marca escogida por el jugador, se define la marca de la computadora. Si el usuario utiliza la 
