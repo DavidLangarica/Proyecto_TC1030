@@ -45,10 +45,16 @@ class Gato{
 
 // Implementación de los métodos---------------------------------------------------------------------------------------------
 
+/**
+ * El constructor por default inicializa el tablero (que se regenera en cada sesión) y las preguntas, las cuales 
+ * son declaradas como tal en esta parte, ya que son constantes en todo el juego. Como son 9 casillas, se declara 
+ * la pregunta correspondiente a cada una haciendo uso del constructor con parámetros de la clase TRIVIA
+ *
+ * @param 
+ * @return 
+ */
+
 Gato :: Gato(){
-    /* El constructor con parámetos inicializa el tablero (que se regenera en cada sesión) y las preguntas, las cuales son declaradas
-    como tal en esta parte, ya que son constantes en todo el juego. Como son 9 casillas, declaramos la pregunta correspondiente a cada una
-    haciendo uso del constructor con parámetros de la clase TRIVIA */
 
     Tablero board_;
     board = board_;
@@ -82,42 +88,70 @@ Gato :: Gato(){
     Trivia pregunta9(9,"Geografia","Cual es el rio mas grande del mundo?","Nilo","Misisipi","Yangtze","Amazonas");
     preguntas_[9] = pregunta9;
 
-    // Guardamos las preguntas en el arreglo
+    // Se guardan las preguntas en el arreglo
     for (int i = 1; i<10; i++){
         preguntas[i] = preguntas_[i];
     }
 };
 
-void Gato :: bienvenidatxt(){
-    // Primer texto de bienvenida al usuario, compuesto unicamente de cout, por lo tanto no retorna nada.
+/**
+ * bienvenidatxt es el primer texto de bienvenida al usuario con la primera información relevante para el juego
+ *
+ * @param 
+ * @return 
+ */
 
+void Gato :: bienvenidatxt(){
     cout << "\nBienvenido al Juego del Gato Estudiante\n";
     cout << "\nEste programa es el mismo juego de Gato que ya conoces, solo que un tanto diferente. \n";
     cout << "\nJugaras contra la computadora. Pero, para hacer mas retador el programa, se haran uso de preguntas de trivia. Si respondes correctamente ganaras un turno y podras colocar tu marca, en caso de responder incorrectamente perderas tu turno. Comencemos..." << endl;
 };
 
-void Gato :: instruccionestxt(){
-    // Segundo texto a desplegar, mismo caso que el anterior.
+/**
+ * instruccionestxt es el segundo texto a desplegar, mismo caso que el anterior. Y llama al tablero de referencia con tab_referencia
+ *
+ * @param 
+ * @return 
+ */
 
+void Gato :: instruccionestxt(){
     cout << "\nEl tablero esta dividido en 9 cuadros. Para escoger una casilla, digita el numero correspondiente a la deseada. La figura de abajo es nuestro tablero, como vez cada casilla tiene un numero, deberas de ingresar el numero correspondiente a la casilla que desees.\n" << endl;
     board.tab_referencia();
 };
 
+/**
+ * display_turnoinfo es el método para desplegar al usuario el avance del juego. Se despliega en consola el
+ * tablero con las casillas ocupadas hasta un momento determinado
+ *
+ * @param 
+ * @return 
+ */
+
 void Gato :: display_turnoinfo(){
-    /* Método para desplegar al usuario el avance del juego. Se despliega en consola el tablero con las casillas ocupadas
-    hasta un momento determinado*/
     board.formato();
 };
 
+/**
+ * display_pregunta Usa el formato preestablecido en la clase TRIVIA para mostrar las preguntas de cada casilla en el formato deseado.
+ *
+ * @param int en el que se espera un número del 1 al 9 (casillas) para enviar la pregunta correspondiente
+ * @return stringstream con el formato definido para la pregunta de la casilla determinada
+ */
+
 string Gato :: display_pregunta(int num_pregunta){
-    // Usamos el formato preestablecido en la clase TRIVIA para mostrar las preguntas de cada casilla en el formato deseado.
     std::stringstream aux;
     aux << preguntas[num_pregunta].get_preguntainfo();
     return aux.str();
 };
 
+/**
+ * def_freespace importa al tablero y la posición elegida (casilla) por el Jugador en turno para ver si el espacio está disponible
+ * 
+ * @param int la posición elegida del 1 al 9
+ * @return bool que indica si la casilla está libre o no
+ */
+
 bool Gato :: def_freespace(int pos){
-    // Importamos al tablero y la posición elegida (casilla) por el Jugador en turno para ver si el espacio está disponible
     char tab[10];
     for (int i=1; i<10;i++){
         tab[i] = board.getTablero(i);
@@ -133,13 +167,29 @@ bool Gato :: def_freespace(int pos){
     }
 };
 
+/**
+ * nohay_freespace es el método que pretende retomar lo planteado en la clase TABLERO para verificar que aún 
+ * existan espacios en blanco y poderlo usar dentro de esta clase.
+ * 
+ * @param 
+ * @return bool que indica si existen o no casillas libres en el tablero
+ */
+
 bool Gato :: nohay_freespace(){
-    // Método que pretende retomar lo planteado en la clase TABLERO para verificar que aún existan espacios en blanco.
     return board.check_freespace();
 };
 
+/**
+ * j1_jugar es el desarrollo de las jugadas del usuario, se contestan las preguntas y se verifican que sean
+ * correctas. También, se llevan a cabo las validaciones de si la posición
+ * elegida se encuentra dentro de rango y si la casilla está libre. Si todas las condiciones son verdaderas
+ * se coloca la marca en la casilla elegida
+ * 
+ * @param int con el número determinado como verificación en el main para el usuario (0) 
+ * @return 
+ */
+
 void Gato :: j1_jugar(int num_player){
-    // Desarrollo de las jugadas del usuario, se contestan las preguntas y se verifican que sean correctas para poder colocar una marca.
     int pos;
 
     do{
@@ -175,20 +225,27 @@ void Gato :: j1_jugar(int num_player){
     }while(true);
 };
 
+/**
+ * cpu_jugar es el desarrollo de las jugadas la computadora. La computadora decidirá de manera aleatoria
+ * una posición de las que estén libres, para eso usamos la función rand(). Sin embargo, por si
+ * sola arrojaría los mismos valores cada que se corre el programa, por lo que es necesario corregirlo haciendo uso de la solución
+ * brindada por eHowTech en: https://www.youtube.com/watch?v=7-dAps6Zf2M. 
+ * 
+ * La estrategia agrega practicamente otra capa aleatoria en la que los números aleatorios generados por rand() 
+ * se escogen aleatoriamente.Se define a la variable de partida 'seed', de donde srand() donde comenzará con la muestra aleatoria.
+ * Se usa unsigned para dar solo valores a partir del cero a los enteros positivos.
+ * 
+ * Una vez que se verifique que la
+ * casilla está libre, se coloca la marca de la computadora.
+ * 
+ * @param int con el número determinado como verificación en el main para la computadora (1) 
+ * @return 
+ */
+
 void Gato :: cpu_jugar(int num_player){
-
-    /* La computadora decidirá de manera aleatoria una posición de las que estén libres, para eso usamos la función rand(). Sin embargo, por si
-    sola arrojaría los mismos valores cada que se corre el programa, por lo que es necesario corregirlo haciendo uso de la solución
-    brindada por eHowTech en: https://www.youtube.com/watch?v=7-dAps6Zf2M */
-
     // Variable para almacenar el número aleatorio generado.
     int n_random;
 
-    // La siguiente estrategia agrega practicamente otra capa aleatoria en la que los números aleatorios generados por rand() se escogen aleatoriamente.
-    
-    /* Definimos a la variable de partida 'seed', de donde srand() donde comenzará con la muestra aleatoria.
-    Usamos unsigned para dar solo valores a partir del cero a los enteros positivos.
-    */
     srand((unsigned int) time(NULL));
 
     cout << "\nTurno de: " << jugadores[num_player]->getName() << endl;
@@ -203,10 +260,16 @@ void Gato :: cpu_jugar(int num_player){
     }while (true);
 };
 
+/**
+ * Con los datos obtenidos, def_jugadasganadoras verifica cual de los usuarios ha ganado correspondiendo a las 
+ * condiciones conocidas del juego de gato tradicional (tres marcas en diagonal, horizontal o vertical). Se hacen 
+ * uso de dos variables de ayuda (tab y marc) para la comparación con las casillas del tablero y las marcas
+ * 
+ * @param int el número de identificación (0 si es el jugador o 1 si es la computadora)
+ * @return bool que indica si se cumplen las condiciones para definir que el jugador en cuestión ha ganado
+ */
+
 bool Gato :: def_jugadasganadoras(int num_player){
-    /* Con los datos obtenidos, se verifica cual de los usuarios ha ganado correspondiendo a las condiciones conocidas del juego
-    de gato tradicional (tres marcas en diagonal, horizontal o vertical). Se hace uso de dos variables de ayuda (tab y marc) para la comparación
-    con las casillas del tablero y las marcas */
 
     char tab[10];
     for (int i=1; i<10;i++){
@@ -226,9 +289,15 @@ bool Gato :: def_jugadasganadoras(int num_player){
             (tab[3]==marc && tab[5]==marc && tab[7]==marc));
 };
 
-bool Gato :: preguntacasilla(int pos_){
-    // Método para mostrar todas las preguntas dependiendo de la casilla y evaluar si son correctas para cada pregunta.
+/**
+ * preguntacasilla() es el método para mostrar todas las preguntas dependiendo de la casilla y 
+ * evaluar si se ha digitado una respuesta correcta para cada pregunta.
+ * 
+ * @param int con el número de casilla escogido por el jugador
+ * @return bool que indica si ha contestado correctamente a la pregunta
+ */
 
+bool Gato :: preguntacasilla(int pos_){
     char ans; // Variable para almacenar la letra de la respuesta del usuario
     
     // Validación de la respuesta correcta de la pregunta 1
