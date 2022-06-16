@@ -479,7 +479,6 @@ bool Gato :: preguntacasilla(int pos_){
             else if (ans == 'A' || ans == 'C' || ans == 'D'){
                 // No digitó la respuesta correcta
                 cout << "\nIncorrecto!" << endl;
-                cout << "\nHaz usado todos tus intentos" << endl;
                 return false;
                 break;
             }
