@@ -1,4 +1,4 @@
-## Project A01708936 {TC1030}
+## Project A01708936
 ## Student Tic Tac Toe Game
 
 This program is the same Tic Tac Toe game we know, just a little different.  The user will play against the computer but, to make the game more challenging, trivia questions will be asked. If the player answers correctly, then he will win a turn and will be able to place his mark on the 9-square board, in case he answers incorrectly he will lose his turn in that round and will skip to the computer's turn. 
