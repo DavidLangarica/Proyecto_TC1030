@@ -1,46 +1,48 @@
-# Proyecto A01708936 {TC1030}
-## Juego del Gato Estudiante
+## Project A01708936 {TC1030}
+## Student Tic Tac Toe Game
 
-Este programa es el mismo juego de Gato que conocemos, solo que un poco diferente.  El usuario jugará contra la computadora pero, para hacer más retador el juego, se harán uso de preguntas de trivia. Si el jugador responde correctamente, entonces ganará un turno y podrá colocar su marca en el tablero de 9 casillas, en caso de responder incorrectamente perderá su turno en esa ronda y se saltará al turno de la computadora. 
-
-_____________
-
-### Avance 1
-Diagrama de clases del programa (archivo Diagramadeclases_A01708936.pdf)
-
-En este caso, la clase 'Gato' añade (dependiendo de la relación de agregación o composición) a las demás clases, y con 'get_turnoinfo()' tiene la capacidad de mostrar las preguntas del juego, el turno en el que se encuentran y la casilla seleccionada. En el caso de los dos jugadores, se identifica la existencia de atributos y valores que pueden ser heredados por la clase 'Jugador' y la clase mantiene una relación por agregación con la clase 'Gato'. El usuario pueda definir los atributos de 'J1' y puede tomar decisiones sobre sus movidas, en el caso de 'CPU' el programa se encarga de la automatización de este y el usuario no intercede en ello.
-
-Las preguntas para el usuario son del tipo 'Trivia', la cual es la clase en donde se define el formato y el cómo se muestran las preguntas y opciones durante el juego. Como esta clase tiene una relación fuerte con el juego en general, a razón de que sin ellas el usuario no puede realizar jugadas, se le detona una relación de composición y se reiniciarán con cada juego. También, la clase 'Gato' tiene un arreglo en donde se guardarán todas las 9 preguntas del tipo 'Trivia'.
-
-Parecido al caso anterior, tenemos a la clase 'Tablero', en donde se vuelve a tomar la relación fuerte con el juego por las mismas razones, es aquí en donde se estarán guardando las decisiones tomadas por ambos jugadores y en donde, visualmente, el usuario podrá observar las casillas que están libres, también se encarga de definir la aplicación y evaluación de los juegos, por lo cual 'Tablero' tiene como atributo a un arreglo de casillas, pues nuestro juego se forma de 9 casillas en total, las cuales deberán de ser ocupadas por las marcas de ambos jugadores durante el desarrollo del juego para así llevar las comparaciones pertinentes que lleven a la evaluación del ganador cuando se cumplan las condiciones de una victoria ó, que de lo contrario exista un empate (métodos de la presente clase).
+This program is the same Tic Tac Toe game we know, just a little different.  The user will play against the computer but, to make the game more challenging, trivia questions will be asked. If the player answers correctly, then he will win a turn and will be able to place his mark on the 9-square board, in case he answers incorrectly he will lose his turn in that round and will skip to the computer's turn. 
 
 _____________
 
-### Avance 2
-Favor de compilar el archivo main.cpp por medio de g++, y el cual fue probado en múltiples plataformas para comprobar su compatibilidad.
+### Phase 1
+Program Class Diagram (file DiagramClassDiagram_A01708936.pdf)
 
-En este avance se presenta la transición del diagrama de clases al código en C++ haciendo uso de la programación orientada a objetos. En todos los archivos se encontrarán con comentarios que describen el funcionamiento y el objetivo de cada método (y posiblemente cada línea) para asegurar la comprensión total del mismo.
+In this case, the class 'Cat' adds (depending on the aggregation or composition relationship) to the other classes, and with 'get_turnoinfo()' has the ability to display the questions of the game, the turn they are in and the selected square. In the case of the two players, the existence of attributes and values that can be inherited by the 'Player' class is identified and the class maintains a relationship by aggregation with the 'Cat' class. The user can define the attributes of 'J1' and can make decisions about its moves, in the case of 'CPU' the program takes care of the automation of this and the user does not intercede in it.
 
-En el programa, se implementó el concepto de Herencia (como se mostró en el diagrama de clases) en la clase de Jugador (Jugador.h). En el mismo se puede apreciar el armado de los constructores para la clase padre y las clases hijas (J1 y CPU) y los propios métodos getters y setters (con un amplio enfoque en el usuario J1). En el caso de los modificadores de acceso, los métodos se mantienen completamente 'public' a razón de que es necesario para que la clase Gato pueda ingresar a los datos; los atributos heredados de la clase padre se definen como 'protected' para que únicamente las clases hijas puedan acceder sin problema a los mismos y que las otras clases solo puedan hacer uso de ellos a través de los métodos getters y setters.
+The questions for the user are of type 'Trivia', which is the class where the format and how the questions and options are displayed during the game are defined. As this class has a strong relationship with the game in general, because without them the user cannot make moves, a composition relationship is detonated and will be reset with each game. Also, the 'Cat' class has an array where all 9 questions of the 'Trivia' type will be stored.
 
-En la clase hija 'J1' se hace uso del setter para el nombre, para que el usuario pueda editar su nombre y sea usado durante el juego. En el caso de la CPU no es necesario, pues no tendrá una definición para un nombre en específico, por lo que se define en el constructor.
-
-Asimismo, se ocupa la sobreescritura de métodos con el método setter de la clase padre y de las clases hijas para definir la marca a utilizar en el juego, en el caso de la clase padre se ocupa la técnica tradicional para un método setter. Sin embargo, es preciso que la clase hija 'J1' tenga un método setter con una interacción directa con el usuario para que pueda escoger entre 'X'/'O', con base en ello, la computadora obtendrá su marca a través de una evaluación.
-_____________
-
-### Avance 3
-Para este avance, se identifica al método polimórfico de la clase con herencia 'Jugador' (en el archivo Jugador.h). Al método setMark se le incluye la palabra reservada 'virtual' para indicar que se hará uso del polimorfismo, pues tendrá implementaciones diferentes dependiendo de la clase hija. 
-
-Para el método 'setMark' existe una implementación algo más compleja, mientras que la clase padre únicamente implementa el método en su generalidad, la clase hija 'J1' hará una evaluación para definir la marca deseada y dada por el usuario; mientras que la clase hija "CPU" tomará la marca definida por el usuario para definir la propia (Si el usuario escoge 'X', entonces la cpu tendrá 'O' y viceversa).
-
-Después, se retoma que los jugadores poseen una relación de agregación con la clase 'Gato' por lo que las clases hijas 'J1' y 'CPU' se agregan en el main. Para cubrir lo que se ha mencionado con relación al polimorfismo, primero definimos al arreglo del tipo 'Jugador' con punteros (para indicar que existen métodos con polimorfismo en la clase con herencia y que se encuentran en el heap). Posteriormente, para definir a los objetos creados con punteros, se aplica con el constructor por default a los dos tipos de jugadores que interceden en el juego (J1 y CPU) con sus respectivas posiciones en el arreglo del tipo Jugador. Es así, como se implementan los métodos y se aplica el polimorfismo en el método definido como tal.
-_____________
-
-### Avance 4
-Desde el principio, nunca se ha deseado crear un objeto a partir de la clase Jugador, sino que el proposito de esta es exclusivamente detonar las características similares del J1 y CPU. Por lo tanto, para este último avance, se convierte a la clase Jugador en abstracta para que no sea posible crear objetos a partir de la misma, para ello se usó la clase con polimormismo 'setMark' en donde se hizo la correspondiente igualación a cero y fue así como se convirtió la clase.
-
-Más aún, a razón de que la clase Jugador se convirtió en abstracta, entonces fue preciso hacer ajustes en la clase Gato, pues ahí "se creaban" objetos de ese tipo para poder emplearlos en los métodos a aplicar en el main. Por lo tanto, se convirtió al arreglo de Jugador jugadores[2] a un arreglo de punteros del tipo Jugador que posteriormente puedan ser reemplazados por objetos del tipo J1 y CPU directamente en el heap para no provocar errores al hacer uso de una clase abstracta, de ahí se derivó el tener que cambiar los métodos en los que se usan a los jugadores para que fueran compatibles con los punteros.
+Similar to the previous case, we have the class 'Board', where the strong relationship with the game is again taken for the same reasons, it is here where the decisions taken by both players will be saved and where, visually, the user will be able to observe the boxes that are free, it is also in charge of defining the application and evaluation of the games, Therefore, 'Board' has as an attribute an arrangement of squares, because our game is formed by 9 squares in total, which must be occupied by the marks of both players during the development of the game in order to carry out the relevant comparisons that lead to the evaluation of the winner when the conditions of a victory are met or, otherwise there is a tie (methods of this class).
 
 _____________
 
-Para más información, es posible dirigirse a cada archivo adjunto del código y considerar los comentarios dentro del código realizado.
+### Phase 2
+Please compile the main.cpp file using g++, which was tested on multiple platforms for compatibility.
+
+This preview presents the transition from class diagram to C++ code using object oriented programming. In all files you will find comments describing the operation and purpose of each method (and possibly each line) to ensure full understanding.
+
+In the program, the concept of Inheritance was implemented (as shown in the class diagram) in the Player class (Player.h). In it, the assembly of the constructors for the parent class and the child classes (J1 and CPU) and the getters and setters methods themselves (with a broad focus on the J1 user) can be seen. In the case of the access modifiers, the methods are kept completely 'public' because it is necessary for the Cat class to access the data; the attributes inherited from the parent class are defined as 'protected' so that only the child classes can access them without problem and the other classes can only make use of them through the getters and setters methods.
+
+In the child class 'J1' use is made of the setter for the name, so that the user can edit its name and it can be used during the game. In the case of the CPU it is not necessary, since it will not have a definition for a specific name, so it is defined in the constructor.
+
+Likewise, method overwriting is used with the setter method of the parent class and of the child classes to define the brand to be used in the game, in the case of the parent class the traditional technique for a setter method is used. However, it is necessary that the child class 'J1' has a setter method with a direct interaction with the user so that it can choose between 'X'/'O', based on this, the computer will obtain its mark through an evaluation.
+_____________
+
+### Phase 3
+For this advancement, the polymorphic method of the class with inheritance 'Player' is identified (in the file Player.h). The 'virtual' reserved word is included to the setMark method to indicate that polymorphism will be used, since it will have different implementations depending on the child class. 
+
+For the 'setMark' method there is a somewhat more complex implementation, while the parent class only implements the method in its generality, the child class 'J1' will make an evaluation to define the desired mark given by the user; while the child class 'CPU' will take the mark defined by the user to define its own (If the user chooses 'X', then the cpu will have 'O' and vice versa).
+
+Then, it is resumed that the players have an aggregation relationship with the class 'Cat' so the child classes 'J1' and 'CPU' are added in the main. To cover what has been mentioned in relation to polymorphism, we first define the array of type 'Player' with pointers (to indicate that there are methods with polymorphism in the class with inheritance and that they are in the heap). Subsequently, to define the objects created with pointers, we apply with the default constructor to the two types of players that intervene in the game (J1 and CPU) with their respective positions in the array of the Player type. This is how the methods are implemented and polymorphism is applied to the method defined as such.
+_____________
+
+### Phase 4
+From the beginning, it has never been desired to create an object from the Player class, but the purpose of this one is exclusively to detonate the similar characteristics of the J1 and CPU. Therefore, for this last advance, the Player class is made abstract so that it is not possible to create objects from it, for this purpose the class with polymorphism 'setMark' was used where the corresponding equalization to zero was made and this is how the class was converted.
+
+Moreover, since the Player class became abstract, then it was necessary to make adjustments in the Cat class, since objects of that type were "created" there in order to use them in the methods to be applied in the main. Therefore, the arrangement of Player players[2] was converted to an arrangement of pointers of the Player type that could later be replaced by objects of type J1 and CPU directly in the heap so as not to cause errors when making use of an abstract class, hence the need to change the methods in which the players are used so that they were compatible with the pointers.
+
+_____________
+
+For more information, it is possible to go to each code attachment and consider the comments inside the code.
+
+
